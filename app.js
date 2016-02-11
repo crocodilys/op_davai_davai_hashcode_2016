@@ -17,4 +17,13 @@ const productWeights = lines.shift().split(' ');
 const numOfWirehouses = +lines.shift();
 console.log('numOfWirehouses', numOfWirehouses);
 
+const wirehousesInfo = lines.slice(0, numOfWirehouses * 2);
+for (let i = 0; i < numOfWirehouses; i += 2) {
+  const [x, y] = wirehousesInfo[i].split(' ');
+  console.log(`wirehouse[${x}][${y}]`);
+  const products = wirehousesInfo[i+1].split(' ');
+  for (let j = 0; j < products.length; j += 1) {
+    // console.log('');
+  }
+}
 
