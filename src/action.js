@@ -5,3 +5,5 @@ class Action
     this.x = x;
     this.y = y;
   }
+
+  module.exports = Action;
