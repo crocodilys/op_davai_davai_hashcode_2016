@@ -27,7 +27,6 @@ const wirehouses = [];
 const wirehousesInfo = lines.splice(0, numOfWirehouses * 2);
 for (let i = 0; i < numOfWirehouses; i += 2) {
   const [x, y] = wirehousesInfo[i].split(' ');
-  console.log(`wirehouse[${x}][${y}]`);
   const wirehouse = new Wirehouse(x, y);
 
   const products = wirehousesInfo[i+1].split(' ');
@@ -38,3 +37,14 @@ for (let i = 0; i < numOfWirehouses; i += 2) {
 }
 
 console.log('wirehouses', wirehouses);
+
+const numOfOrders = +lines.shift();
+for (let i = 0; i < numOfOrders; i += 1) {
+  const [destX, destY] = lines.shift().split(' ');
+  const numOfItemsInOrder = +lines.shift();
+  const orderProductTypes = lines.shift().split(' ');
+  for (const pType of orderProductTypes) {
+    productTypes[pType];
+  }
+}
+
