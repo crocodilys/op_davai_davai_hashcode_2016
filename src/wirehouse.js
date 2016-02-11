@@ -6,7 +6,7 @@ class Wirehouse {
   }
 
   addProduct(n, product) {
-    this.products.n = product;
+    this.products[product.type] = n;
   }
 }
 
