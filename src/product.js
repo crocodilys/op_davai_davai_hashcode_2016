@@ -8,3 +8,5 @@ class Product {
     warehouses.warehouseNumber = warehouse;
   }
 }
+
+module.exports = Product;

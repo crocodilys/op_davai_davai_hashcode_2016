@@ -6,6 +6,8 @@ class Wirehouse {
   }
 
   addProduct(n, product) {
-    products.n = product;
+    this.products.n = product;
   }
 }
+
+module.exports = Wirehouse;

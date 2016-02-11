@@ -10,20 +10,31 @@ const config = lines.shift();
 const [rows, columns, drones, turns, maxPayload] = config.split(' ');
 console.log('config', config);
 
+const Product = require('./src/product');
 lines.shift(); // num of product types
 const productWeights = lines.shift().split(' ');
-// console.log('weights', productWeights);
+const productTypes = [];
+for (const w of productWeights) {
+  productTypes.push(new Product(w));
+}
 
 const numOfWirehouses = +lines.shift();
 console.log('numOfWirehouses', numOfWirehouses);
+
+const Wirehouse = require('./src/wirehouse');
+const wirehouses = [];
 
 const wirehousesInfo = lines.splice(0, numOfWirehouses * 2);
 for (let i = 0; i < numOfWirehouses; i += 2) {
   const [x, y] = wirehousesInfo[i].split(' ');
   console.log(`wirehouse[${x}][${y}]`);
+  const wirehouse = new Wirehouse(x, y);
+
   const products = wirehousesInfo[i+1].split(' ');
   for (let j = 0; j < products.length; j += 1) {
-    // console.log('');
+    wirehouse.addProduct(products[j], productTypes[j]);
   }
+  wirehouses.push(wirehouse);
 }
 
+console.log('wirehouses', wirehouses);
