@@ -14,8 +14,8 @@ const Product = require('./src/product');
 lines.shift(); // num of product types
 const productWeights = lines.shift().split(' ');
 const productTypes = [];
-for (const w of productWeights) {
-  productTypes.push(new Product(w));
+for (let i = 0; i < productWeights.length; i += 1) {
+  productTypes.push(new Product(productWeights[i], i));
 }
 
 const numOfWirehouses = +lines.shift();
@@ -38,13 +38,21 @@ for (let i = 0; i < numOfWirehouses; i += 2) {
 
 console.log('wirehouses', wirehouses);
 
+const Order = require('./src/Order');
+const orders = [];
+
 const numOfOrders = +lines.shift();
 for (let i = 0; i < numOfOrders; i += 1) {
   const [destX, destY] = lines.shift().split(' ');
+  const order = new Order(destX, destY);
   const numOfItemsInOrder = +lines.shift();
   const orderProductTypes = lines.shift().split(' ');
   for (const pType of orderProductTypes) {
-    productTypes[pType];
+    order.addProduct(productTypes[pType]);
   }
+  orders.push(order);
 }
+
+console.log('orders', orders);
+console.log('lines', lines);
 

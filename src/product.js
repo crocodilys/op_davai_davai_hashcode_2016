@@ -1,6 +1,7 @@
 class Product {
-  constructor(weight) {
+  constructor(weight, type) {
     this.weight = weight;
+    this.type = type;
     this.warehouses = {};
   }
 
