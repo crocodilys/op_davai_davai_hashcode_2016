@@ -1,14 +1,13 @@
 const fs = require('fs');
 
 const fileNames = ['busy_day.in', 'mother_of_all_warehouses.in', 'redundancy.in'];
-const targetFile = 0;
+const targetFile = 2;
 
 const data = fs.readFileSync(`./inputs/${fileNames[targetFile]}`).toString();
 const lines = data.split('\n');
 
 const config = lines.shift();
 const [rows, columns, drones, turns, maxPayload] = config.split(' ');
-console.log('config', config);
 
 const Product = require('./src/product');
 lines.shift(); // num of product types
@@ -19,8 +18,6 @@ for (let i = 0; i < productWeights.length; i += 1) {
 }
 
 const numOfWirehouses = +lines.shift();
-console.log('numOfWirehouses', numOfWirehouses);
-
 const Wirehouse = require('./src/wirehouse');
 const wirehouses = [];
 
@@ -36,8 +33,6 @@ for (let i = 0; i < numOfWirehouses * 2; i += 2) {
   wirehouses.push(wirehouse);
 }
 
-console.log('wirehouses', wirehouses);
-
 const Order = require('./src/order');
 const orders = [];
 
@@ -52,9 +47,6 @@ for (let i = 0; i < numOfOrders; i += 1) {
   }
   orders.push(order);
 }
-
-console.log('orders', orders);
-console.log('lines', lines);
 
 const selectOrder = () => {
   if (orders[0].products.length == 0) {
@@ -72,7 +64,7 @@ const selectProduct = (order) => {
 const selectWarehouse = (product) => {
   for (let i = 0; i < numOfWirehouses; i += 1) {
     const p = wirehouses[i].products;
-    if (p[product.type]) {
+    if (p[product.type] > 0) {
         p[product.type] = p[product.type] - 1;
         return wirehouses[i];
     }
@@ -105,6 +97,11 @@ while (true) {
     }
     const product = selectProduct(order);
     const warehouse = selectWarehouse(product);
+
+    if (!warehouse) {
+      orders.shift();
+      continue;
+    }
     action.drone.load(product);
     actions.push(new Action(action.drone, action.time + calcDist(action, warehouse), warehouse.x, warehouse.y, order));
     const C = `${action.drone.n} L ${warehouse.n} ${product.type} 1`;
