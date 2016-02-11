@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const fileNames = ['busy_day.in', 'mother_of_all_warehouses.in', 'redundancy.in'];
-const targetFile = 1;
+const targetFile = 0;
 
 const data = fs.readFileSync(`./inputs/${fileNames[targetFile]}`).toString();
 const lines = data.split('\n');
@@ -25,7 +25,7 @@ const Wirehouse = require('./src/wirehouse');
 const wirehouses = [];
 
 const wirehousesInfo = lines.splice(0, numOfWirehouses * 2);
-for (let i = 0; i < numOfWirehouses; i += 2) {
+for (let i = 0; i < numOfWirehouses * 2; i += 2) {
   const [x, y] = wirehousesInfo[i].split(' ');
   const wirehouse = new Wirehouse(x, y, i);
 
