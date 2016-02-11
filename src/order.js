@@ -1,7 +1,8 @@
 class Order {
-  constructor(x, y) {
+  constructor(x, y, n) {
     this.x = x;
     this.y = y;
+    this.n = n;
     this.products = [];
   }
 

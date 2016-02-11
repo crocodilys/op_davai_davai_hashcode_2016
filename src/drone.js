@@ -1,5 +1,16 @@
-class Drone() {
+class Drone {
+  constructor(n) {
+    this.n = n;
+    this.product = null;
+  }
 
+  load(product) {
+    this.product = product;
+  }
+
+  deliver() {
+    return this.product.type;
+  }
 }
 
-module.exports = Order;
+module.exports = Drone;
