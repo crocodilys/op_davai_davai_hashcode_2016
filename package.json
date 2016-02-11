@@ -1,0 +1,14 @@
+{
+  "name": "hashcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --use_strict --es_staging --harmony_destructuring app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "brain": "^0.7.0"
+  }
+}
