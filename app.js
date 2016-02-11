@@ -24,7 +24,7 @@ const wirehouses = [];
 const wirehousesInfo = lines.splice(0, numOfWirehouses * 2);
 for (let i = 0; i < numOfWirehouses * 2; i += 2) {
   const [x, y] = wirehousesInfo[i].split(' ');
-  const wirehouse = new Wirehouse(x, y, i);
+  const wirehouse = new Wirehouse(x, y, i / 2);
 
   const products = wirehousesInfo[i+1].split(' ');
   for (let j = 0; j < products.length; j += 1) {
