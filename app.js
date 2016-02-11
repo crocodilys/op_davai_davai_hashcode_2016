@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const fileNames = ['busy_day.in', 'mother_of_all_warehouses.in', 'redundancy.in'];
-const targetFile = 2;
+const targetFile = 0;
 
 const data = fs.readFileSync(`./inputs/${fileNames[targetFile]}`).toString();
 const lines = data.split('\n');
@@ -86,6 +86,9 @@ for (let i = 0; i < drones; i += 1) {
   actions.push(new Action(new Drone(i), 0, wirehouses[0].x, wirehouses[0].y, null));
 }
 while (true) {
+  if(actions.length === 0) {
+    break;
+  }
   const action = actions.shift();
   if (action.time >= turns) {
     break;
@@ -103,12 +106,20 @@ while (true) {
       continue;
     }
     action.drone.load(product);
-    actions.push(new Action(action.drone, action.time + calcDist(action, warehouse), warehouse.x, warehouse.y, order));
+    const dist = calcDist(action, warehouse);
+    if (dist + action.time >= turns) {
+      continue;
+    }
+    actions.push(new Action(action.drone, action.time + dist, warehouse.x, warehouse.y, order));
     const C = `${action.drone.n} L ${warehouse.n} ${product.type} 1`;
     logs.push(C);
     console.log(C);
   } else {
     const order = action.order;
+    const dist = calcDist(action, order);
+    if (dist + action.time >= turns) {
+      continue;
+    }
     actions.push(new Action(action.drone, action.time + calcDist(action, order), order.x, order.y, order));
     const C = `${action.drone.n} D ${order.n} ${action.drone.deliver()} 1`;
     action.drone.product = null;
