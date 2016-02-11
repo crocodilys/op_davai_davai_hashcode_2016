@@ -120,4 +120,4 @@ while (true) {
   }
 }
 
-fs.writeFileSync('./out.in', logs.join('\n'));
+fs.writeFileSync('./outputs/out_' + fileNames[targetFile], `${logs.length}\n${logs.join('\n')}`);
