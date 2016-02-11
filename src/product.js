@@ -5,7 +5,7 @@ class Product {
   }
 
   addWarehouse(warehouseNumber, warehouse) {
-    warehouses.warehouseNumber = warehouse;
+    this.warehouses.warehouseNumber = warehouse;
   }
 }
 
